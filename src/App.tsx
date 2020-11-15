@@ -1,12 +1,13 @@
 import React from 'react';
-import './App.scss';
 import styles from './App.module.scss';
+
+import {Header} from './features/Header';
 
 const App: React.FC<{}> = () => {
   return (
-    <div className={`${styles.app} ${styles['dark-theme ']}`}>
+    <div className={`${styles.app} ${styles['dark-theme']}`}>
       <div className={styles.container}>
-        <h1>Hello</h1>
+        <Header />
       </div>
     </div>
   );
