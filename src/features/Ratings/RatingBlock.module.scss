@@ -1,0 +1,45 @@
+.rating {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: auto auto 1fr;
+  grid-template-areas:
+    'img manufacturer rating'
+    'img name price'
+    'img notes date'
+    'description description description';
+}
+
+.img {
+  grid-area: img;
+}
+
+.manufacturer {
+  grid-area: manufacturer;
+}
+
+.rating {
+  grid-area: rating;
+  text-align: right;
+}
+
+.name {
+  grid-area: name;
+}
+
+.price {
+  grid-area: price;
+  text-align: right;
+}
+
+.notes {
+  grid-area: notes;
+}
+
+.date {
+  grid-area: date;
+  text-align: right;
+}
+
+.description {
+  grid-area: description;
+}
