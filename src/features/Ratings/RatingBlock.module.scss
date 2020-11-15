@@ -1,45 +1,69 @@
-.rating {
+.rating-block {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-columns: auto auto 1fr;
+  gap: 0.5rem;
   grid-template-areas:
     'img manufacturer rating'
     'img name price'
     'img notes date'
     'description description description';
+  color: var(--color-theme-text-on-dark);
+  padding: 1rem;
 }
 
 .img {
   grid-area: img;
+  height: 100%;
+  width: 60px;
+  position: relative;
+  background: var(--color-theme-secondary);
+  border-radius: var(--app-border-radius);
+  margin-right: 0.5rem;
 }
 
 .manufacturer {
   grid-area: manufacturer;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--color-theme-text-on-dark-40);
+  letter-spacing: 0.15rem;
 }
 
 .rating {
   grid-area: rating;
   text-align: right;
+  color: var(--color-theme-text-on-dark);
 }
 
 .name {
   grid-area: name;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--color-theme-text-on-dark);
+  letter-spacing: 0.15rem;
 }
 
 .price {
   grid-area: price;
   text-align: right;
+  color: var(--color-theme-text-on-dark-60);
 }
 
 .notes {
   grid-area: notes;
+  text-transform: uppercase;
+  font-weight: lighter;
+  color: var(--color-theme-text-on-dark-60);
 }
 
 .date {
   grid-area: date;
   text-align: right;
+  color: var(--color-theme-text-on-dark-60);
 }
 
 .description {
   grid-area: description;
+  color: var(--color-theme-text-on-dark-60);
 }

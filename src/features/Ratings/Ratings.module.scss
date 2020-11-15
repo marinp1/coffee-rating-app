@@ -16,3 +16,14 @@
     bottom: 5rem;
   }
 }
+
+.ratings {
+  margin-left: calc(var(--app-padding) * -1);
+  margin-right: calc(var(--app-padding) * -1);
+  > div:nth-of-type(2n) {
+    background: var(--color-theme-background);
+  }
+  > div:nth-of-type(2n + 1) {
+    background: var(--color-theme-secondary-accent);
+  }
+}
