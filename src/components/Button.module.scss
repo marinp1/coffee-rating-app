@@ -1,0 +1,47 @@
+@mixin button-styles {
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.25);
+  padding: 0.5rem 1rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(90%);
+    outline: none;
+  }
+  &:active {
+    filter: brightness(80%);
+    outline: none;
+  }
+  &:disabled {
+    background: var(--color-theme-disabled);
+    color: var(--color-theme-text-on-dark);
+    cursor: not-allowed;
+    &:hover {
+      background: var(--color-theme-disabled);
+    }
+    &:active {
+      background: var(--color-theme-disabled);
+    }
+  }
+}
+
+.primary {
+  @include button-styles;
+  background: var(--color-theme-primary);
+  color: var(--color-theme-text-on-light);
+}
+
+.success {
+  @include button-styles;
+  background: var(--color-theme-success);
+  color: var(--color-theme-text-on-light);
+}
+
+.secondary {
+  @include button-styles;
+  background: var(--color-theme-secondary);
+  color: var(--color-theme-text-on-dark);
+}
