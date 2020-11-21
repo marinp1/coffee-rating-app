@@ -1,3 +1,20 @@
 .new-rating {
   margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-rows: auto auto auto auto auto 1fr auto auto;
+  grid-template-columns: 1fr 1fr;
+  height: 1px;
+  flex-grow: 1;
+  box-sizing: border-box;
+  gap: 1rem;
+  grid-template-areas:
+    'company company'
+    'name name'
+    'price size'
+    'rating rating'
+    'notes notes'
+    'taste-notes taste-notes'
+    'add-btn add-btn'
+    'cancel-btn save-btn';
 }

@@ -11,13 +11,32 @@ import styles from './App.module.scss';
 
 const App: React.FC<{}> = () => {
   const location = useLocation();
+  const {pathname} = location;
+
+  const [animation, setAnimation] = React.useState<
+    'slide-left' | 'slide-right'
+  >('slide-left');
+
+  React.useEffect(() => {
+    window.setTimeout(() => {
+      if (pathname.endsWith('/ratings')) {
+        setAnimation('slide-left');
+      } else {
+        setAnimation('slide-right');
+      }
+    }, 300);
+  }, [pathname]);
 
   return (
     <div className={`${styles.app} ${styles['dark-theme']}`}>
       <div className={styles.container}>
         <Header />
         <TransitionGroup style={{position: 'relative'}}>
-          <CSSTransition key={location.key} classNames="slide" timeout={300}>
+          <CSSTransition
+            key={location.key}
+            classNames={animation}
+            timeout={300}
+          >
             <Switch location={location}>
               <Redirect path="/" to="/ratings" exact={true} />
               <Route path="/ratings" exact={true} component={Ratings} />

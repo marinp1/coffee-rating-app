@@ -19,9 +19,9 @@ const coffeeRatings: CoffeeRating[] = [
     description: 'Hyvä.',
   },
   {
-    manufacturer: 'Nordqvist',
+    manufacturer: 'Nordqvist 2',
     rating: 5,
-    name: 'Jubileum',
+    name: 'Jubileum 1',
     bagPrice: 339,
     bagWeight: 500,
     notes: ['fruity'],
@@ -66,23 +66,7 @@ const Ratings: React.FC<{}> = () => {
           />
         ))}
       </SubHeader>
-      <div className={styles['ratings']}>
-        {coffeeRatings
-          .concat(
-            ...[
-              coffeeRatings,
-              coffeeRatings,
-              coffeeRatings,
-              coffeeRatings,
-              coffeeRatings,
-              coffeeRatings,
-              coffeeRatings,
-              coffeeRatings,
-              coffeeRatings,
-            ]
-          )
-          .map(RatingBlock)}
-      </div>
+      <div className={styles['ratings']}>{coffeeRatings.map(RatingBlock)}</div>
       <div className={styles['new-rating']}>
         <Button href={{type: 'internal', to: '/ratings/new'}}>
           Add new rating

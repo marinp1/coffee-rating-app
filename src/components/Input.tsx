@@ -10,15 +10,28 @@ type RequiredInputProps = Required<Pick<OriginalInputProps, 'name' | 'type'>>;
 type OtherInputProps = Omit<OriginalInputProps, 'name' | 'type'>;
 
 type CustomInputProps = {
+  groupStyles?: React.CSSProperties;
   label: string;
   suffix?: string;
 };
 
 const Input: React.FC<
   OtherInputProps & RequiredInputProps & CustomInputProps
-> = ({type, name, label, suffix, required, placeholder, ...rest}) => {
+> = ({
+  groupStyles,
+  type,
+  name,
+  label,
+  suffix,
+  required,
+  placeholder,
+  ...rest
+}) => {
   return (
-    <div className={`custom-input-group ${styles['group']}`}>
+    <div
+      className={`custom-input-group ${styles['group']}`}
+      style={groupStyles || {}}
+    >
       <label
         htmlFor={name}
         className={required ? styles['required-input'] : ''}
@@ -50,9 +63,12 @@ type OtherTextAreaProps = Omit<OriginalTextAreaProps, 'name'>;
 
 const TextArea: React.FC<
   OtherTextAreaProps & RequiredTextAreaProps & CustomInputProps
-> = ({name, label, suffix, required, placeholder, ...rest}) => {
+> = ({groupStyles, name, label, suffix, required, placeholder, ...rest}) => {
   return (
-    <div className={`custom-input-group ${styles['group']}`}>
+    <div
+      className={`custom-input-group ${styles['group']}`}
+      style={groupStyles || {}}
+    >
       <label
         htmlFor={name}
         className={required ? styles['required-input'] : ''}

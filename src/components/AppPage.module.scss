@@ -3,13 +3,16 @@
   height: calc(100vh - 3.5rem);
   left: 0;
   right: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: calc(100vh - 3.5rem);
 }
 
 .app-page-wrapper {
   position: relative;
   box-sizing: border-box;
-  padding: 0 var(--app-padding) calc(var(--app-padding) * 8) var(--app-padding);
+  padding: 0 var(--app-padding) 0 var(--app-padding);
   width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-flow: column;
 }

@@ -8,6 +8,13 @@
   background: var(--color-theme-secondary);
   color: var(--color-theme-text-on-dark);
   padding: 0.6rem 0.6rem;
+  position: relative;
+  &:invalid {
+    color: red;
+  }
+  &:valid {
+    color: var(--color-theme-success);
+  }
 }
 
 .text {
@@ -46,7 +53,6 @@
 .group {
   display: flex;
   flex-flow: column;
-  margin-bottom: 1rem;
   label {
     color: var(--color-theme-text-on-dark-60);
     text-transform: uppercase;

@@ -28,21 +28,42 @@ code {
     monospace;
 }
 
-/* ANIMATIONS */
-.slide-enter {
+$transition-time: 300ms;
+
+/* ANIMATION: SLIDE RIGHT */
+.slide-right-enter {
+  transform: translateX(-100%);
+}
+
+.slide-right-enter-active {
+  transform: translateX(0%);
+  transition: transform #{$transition-time} ease-in-out;
+}
+
+.slide-right-exit {
+  transform: translateX(0%);
+}
+
+.slide-right-exit-active {
+  transform: translateX(100%);
+  transition: transform #{$transition-time} ease-in-out;
+}
+
+/* ANIMATION: SLIDE LEFT */
+.slide-left-enter {
   transform: translateX(100%);
 }
 
-.slide-enter-active {
+.slide-left-enter-active {
   transform: translateX(0%);
-  transition: transform 300ms ease-in-out;
+  transition: transform #{$transition-time} ease-in-out;
 }
 
-.slide-exit {
+.slide-left-exit {
   transform: translateX(0%);
 }
 
-.slide-exit-active {
+.slide-left-exit-active {
   transform: translateX(-100%);
-  transition: transform 300ms ease-in-out;
+  transition: transform #{$transition-time} ease-in-out;
 }
