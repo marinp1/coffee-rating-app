@@ -67,7 +67,9 @@ const Ratings: React.FC<{}> = () => {
       </SubHeader>
       <div className={styles['ratings']}>{coffeeRatings.map(RatingBlock)}</div>
       <div className={styles['new-rating']}>
-        <Button>Add new rating</Button>
+        <Button href={{type: 'internal', to: '/ratings/new'}}>
+          Add new rating
+        </Button>
       </div>
     </div>
   );

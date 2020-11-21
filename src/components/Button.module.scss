@@ -29,6 +29,10 @@
       background: var(--color-theme-disabled);
     }
   }
+  a {
+    color: inherit;
+    text-decoration: unset;
+  }
 }
 
 .primary {

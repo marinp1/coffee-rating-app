@@ -3,6 +3,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 
 import {Header} from './features/Header';
 import Ratings from './features/Ratings';
+import NewRating from './features/Ratings/NewRating';
 
 import styles from './App.module.scss';
 
@@ -12,7 +13,9 @@ const App: React.FC<{}> = () => {
       <div className={styles.container}>
         <Header />
         <Switch>
-          <Route path="/" exact={true} component={Ratings} />
+          <Redirect path="/" to="/ratings" exact={true} />
+          <Route path="/ratings" component={Ratings} />
+          <Route path="/ratings/new" component={NewRating} />
           <Redirect path="*" to="/" />
         </Switch>
       </div>
