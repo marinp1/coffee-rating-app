@@ -1,0 +1,77 @@
+@mixin custom-input {
+  border: unset;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  border-radius: var(--app-border-radius);
+  background: var(--color-theme-secondary);
+  color: var(--color-theme-text-on-dark);
+  padding: 0.6rem 0.6rem;
+}
+
+.text {
+  @include custom-input;
+}
+
+.textarea {
+  @include custom-input;
+  min-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 120%;
+  min-height: 3rem;
+}
+
+.number {
+  @include custom-input;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  -moz-appearance: textfield;
+  text-align: right;
+  position: relative;
+}
+
+.suffix {
+  background: var(--color-theme-background-accent);
+  color: var(--color-theme-text-on-dark);
+  padding: 0.6rem 0.6rem;
+  font-weight: bold;
+  color: var(--color-theme-text-on-dark);
+}
+
+.group {
+  display: flex;
+  flex-flow: column;
+  margin-bottom: 1rem;
+  label {
+    color: var(--color-theme-text-on-dark-60);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    margin-bottom: 0.5rem;
+    &.required-input {
+      &::after {
+        font-weight: lighter;
+        opacity: 0.5;
+        letter-spacing: 0.05rem;
+        content: ' required';
+      }
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  border-radius: var(--app-border-radius);
+  background: var(--color-theme-secondary);
+  box-sizing: border-box;
+  input {
+    flex-grow: 1;
+  }
+}
