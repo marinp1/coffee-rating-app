@@ -5,6 +5,7 @@ import {Button} from '../../components/Button';
 import {SubHeader} from '../../components/SubHeader';
 
 import {RatingBlock, CoffeeRating} from './RatingBlock';
+import {AppPage} from '../../components/AppPage';
 
 const coffeeRatings: CoffeeRating[] = [
   {
@@ -54,7 +55,7 @@ const Ratings: React.FC<{}> = () => {
   >('latest');
 
   return (
-    <div>
+    <AppPage>
       <SubHeader>
         {RATING_ORDERS.map(o => (
           <SubHeaderComponent
@@ -65,13 +66,29 @@ const Ratings: React.FC<{}> = () => {
           />
         ))}
       </SubHeader>
-      <div className={styles['ratings']}>{coffeeRatings.map(RatingBlock)}</div>
+      <div className={styles['ratings']}>
+        {coffeeRatings
+          .concat(
+            ...[
+              coffeeRatings,
+              coffeeRatings,
+              coffeeRatings,
+              coffeeRatings,
+              coffeeRatings,
+              coffeeRatings,
+              coffeeRatings,
+              coffeeRatings,
+              coffeeRatings,
+            ]
+          )
+          .map(RatingBlock)}
+      </div>
       <div className={styles['new-rating']}>
         <Button href={{type: 'internal', to: '/ratings/new'}}>
           Add new rating
         </Button>
       </div>
-    </div>
+    </AppPage>
   );
 };
 

@@ -6,12 +6,14 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import {BrowserRouter as Router} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <Switch>
+        <Route path="*" component={App} />
+      </Switch>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

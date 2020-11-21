@@ -21,9 +21,9 @@
   position: relative;
   width: 100%;
   max-width: #{$screen-md-min};
-  padding: var(--app-padding);
   background: var(--color-theme-background);
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
 }
 
 .dark-theme {

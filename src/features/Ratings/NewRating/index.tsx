@@ -1,14 +1,13 @@
 import React from 'react';
+import {AppPage} from '../../../components/AppPage';
 import {SubHeader} from '../../../components/SubHeader';
-
-import styles from './NewRating.module.scss';
 
 const NewRating: React.FC<{}> = () => {
   return (
-    <div className={styles['new-rating']}>
+    <AppPage>
       <SubHeader>New rating</SubHeader>
       Hello
-    </div>
+    </AppPage>
   );
 };
 

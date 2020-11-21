@@ -1,0 +1,15 @@
+.app-page {
+  position: absolute;
+  height: calc(100vh - 3.5rem);
+  left: 0;
+  right: 0;
+  overflow-y: scroll;
+  height: calc(100vh - 3.5rem);
+}
+
+.app-page-wrapper {
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 var(--app-padding) calc(var(--app-padding) * 8) var(--app-padding);
+  width: 100%;
+}
