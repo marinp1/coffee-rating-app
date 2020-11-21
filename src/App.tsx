@@ -14,7 +14,7 @@ const App: React.FC<{}> = () => {
         <Header />
         <Switch>
           <Redirect path="/" to="/ratings" exact={true} />
-          <Route path="/ratings" component={Ratings} />
+          <Route path="/ratings" exact={true} component={Ratings} />
           <Route path="/ratings/new" component={NewRating} />
           <Redirect path="*" to="/" />
         </Switch>

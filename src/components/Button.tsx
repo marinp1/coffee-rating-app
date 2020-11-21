@@ -1,4 +1,5 @@
 import React from 'react';
+import {useHistory} from 'react-router';
 import {Link} from 'react-router-dom';
 import styles from './Button.module.scss';
 
@@ -14,6 +15,8 @@ const Button: React.FC<
     };
   }
 > = ({children, href, theme, onClick, ...rest}) => {
+  const history = useHistory();
+
   return (
     <button
       {...rest}
@@ -22,19 +25,14 @@ const Button: React.FC<
         href
           ? e => {
               e.preventDefault();
+              href.type === 'internal'
+                ? history.push(href.to)
+                : window.location.assign(href.to);
             }
           : onClick
       }
     >
-      {href ? (
-        href.type === 'internal' ? (
-          <Link to={href.to}>{children}</Link>
-        ) : (
-          <a href={href.to}>{children}</a>
-        )
-      ) : (
-        children
-      )}
+      {children}
     </button>
   );
 };
