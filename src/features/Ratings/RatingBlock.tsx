@@ -24,7 +24,7 @@ const RatingBlock: React.FC<CoffeeRating> = ({
   description,
 }) => {
   const stars = [...new Array(10)]
-    .map((val, ind) => (rating > ind ? '★' : '☆'))
+    .map((_, ind) => (rating > ind ? '★' : '☆'))
     .join(' ');
 
   const price = String((bagPrice / bagWeight).toFixed(2));

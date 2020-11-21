@@ -11,10 +11,6 @@
   justify-content: center;
 
   transition: bottom 0.5s ease-in-out;
-
-  @include tablet {
-    bottom: 5rem;
-  }
 }
 
 .ratings {
@@ -25,5 +21,26 @@
   }
   > div:nth-of-type(2n + 1) {
     background: var(--color-theme-secondary-accent);
+  }
+}
+
+.rating-selector {
+  color: var(--color-theme-text-on-dark-60);
+  transition: filter 100ms linear;
+  cursor: default;
+  &:not(.selected) {
+    &:hover {
+      cursor: pointer;
+      filter: brightness(0.9);
+    }
+    &:active {
+      filter: brightness(0.8);
+    }
+  }
+  &.selected {
+    color: var(--color-theme-text-on-dark);
+  }
+  &:last-child {
+    margin-left: 1rem;
   }
 }

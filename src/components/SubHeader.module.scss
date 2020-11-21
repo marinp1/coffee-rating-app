@@ -1,0 +1,15 @@
+.sub-header {
+  width: calc(100% + var(--app-padding) * 2);
+  margin-left: calc(var(--app-padding) * -1);
+  margin-right: calc(var(--app-padding) * -1);
+  box-sizing: border-box;
+  padding: var(--app-padding);
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  background: var(--color-theme-secondary);
+  color: var(--color-theme-foreground);
+}

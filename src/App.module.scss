@@ -15,10 +15,6 @@
   display: flex;
   justify-content: center;
   background: var(--color-theme-secondary-accent);
-  @include tablet {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
 }
 
 .container {
