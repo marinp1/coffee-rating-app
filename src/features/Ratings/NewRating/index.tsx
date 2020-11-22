@@ -8,6 +8,47 @@ import {SubHeader} from '../../../components/SubHeader';
 
 import styles from './NewRating.module.scss';
 
+import {Rating, GroundType} from '../../../types';
+
+interface RatingForm {
+  manufacturer: string;
+  'coffee-name': string;
+  'ground-type': typeof GroundType;
+  'roast-level': string;
+  price: string;
+  'bag-size': string;
+  rating: string;
+  notes: string;
+  'tasting-notes': string;
+}
+
+const mapFormToRating = (formData: FormData): Rating => {
+  const asPairs = [...formData].reduce(
+    (prev, [key, val]) => ({
+      ...prev,
+      [key]: val || '',
+    }),
+    {}
+  ) as RatingForm;
+
+  return {
+    manufacturer: asPairs['manufacturer'],
+    coffeeName: asPairs['coffee-name'],
+    groundType: asPairs['ground-type'],
+    roastLevel: Number(asPairs['roast-level'] || '-1'),
+    price:
+      Number(
+        (
+          (100 * Number(asPairs['price'] || '0')) /
+          Number(asPairs['bag-size'] || '1')
+        ).toFixed(2)
+      ) * 100,
+    rating: Number(asPairs['rating'] || '-1'),
+    notes: asPairs['notes'],
+    tastingNotes: asPairs['tasting-notes'].split(' '),
+  };
+};
+
 const NewRating: React.FC<{}> = () => {
   const ratingForm = React.useRef<HTMLFormElement>(null);
   const [isFormValid, setFormValidity] = React.useState(false);
@@ -29,20 +70,24 @@ const NewRating: React.FC<{}> = () => {
         className={styles['new-rating']}
         onChange={checkFormValidity}
         onSubmit={e => {
+          setSaving(true);
           e.preventDefault();
           if (ratingForm.current) {
             ratingForm.current.reportValidity();
           }
-          if (!isFormValid) {
+          if (!isFormValid || !ratingForm.current) {
+            setSaving(false);
             return;
           }
+          console.log(mapFormToRating(new FormData(ratingForm.current)));
+          window.setTimeout(() => setSaving(false), 300);
         }}
       >
         <Input
           disabled={saving}
-          label="Company"
+          label="Manufacturer"
           type="text"
-          name="company-name"
+          name="manufacturer"
           required={true}
           minLength={2}
           groupStyles={{gridArea: 'company'}}
@@ -55,6 +100,25 @@ const NewRating: React.FC<{}> = () => {
           minLength={2}
           required={true}
           groupStyles={{gridArea: 'name'}}
+        />
+        <select
+          name="ground-type"
+          required={true}
+          style={{gridArea: 'ground-type'}}
+        >
+          <option value={GroundType.bean}>Bean</option>
+          <option value={GroundType.ground}>Ground</option>
+        </select>
+        <Input
+          label="Roast level"
+          type="number"
+          name="roast-level"
+          required={true}
+          min={1}
+          max={7}
+          step={1}
+          pattern="\d+"
+          groupStyles={{gridArea: 'roast-level'}}
         />
         <Input
           label="Price"
@@ -95,7 +159,7 @@ const NewRating: React.FC<{}> = () => {
         />
         <TextArea
           disabled={saving}
-          name="taste-notes"
+          name="tasting-notes"
           label="Tasting notes"
           groupStyles={{gridArea: 'taste-notes'}}
         />
