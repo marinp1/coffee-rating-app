@@ -3,18 +3,21 @@ import ReactDOM from 'react-dom';
 import 'normalize.css';
 
 import './index.scss';
-import AppWrapper from './AppWrapper';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {StateProvider} from './Store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Switch>
-        <Route path="*" component={AppWrapper} />
-      </Switch>
-    </Router>
+    <StateProvider>
+      <Router>
+        <Switch>
+          <Route path="*" component={App} />
+        </Switch>
+      </Router>
+    </StateProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

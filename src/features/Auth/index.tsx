@@ -1,6 +1,8 @@
 import React from 'react';
 import {FirebaseInstance} from '../../Firebase';
 
+import 'firebaseui/dist/firebaseui.css';
+
 const Auth: React.FC<{firebase: FirebaseInstance | null}> = ({firebase}) => {
   React.useEffect(() => {
     if (!firebase) {

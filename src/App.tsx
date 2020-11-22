@@ -9,14 +9,33 @@ import NewRating from './features/Ratings/NewRating';
 
 import styles from './App.module.scss';
 import {withAppPage} from './components/AppPage';
+import {Firebase} from './Firebase';
+import {store} from './Store';
 
 const App: React.FC<{}> = () => {
   const location = useLocation();
+  const {dispatch} = React.useContext(store);
   const {pathname} = location;
 
   const [animation, setAnimation] = React.useState<
     'slide-left' | 'slide-right'
   >('slide-left');
+
+  React.useEffect(() => {
+    const firebase = new Firebase();
+
+    dispatch({
+      type: 'SET_FIREBASE',
+      payload: firebase,
+    });
+
+    firebase.auth.onAuthStateChanged(user =>
+      dispatch({
+        type: 'SET_USER',
+        payload: user,
+      })
+    );
+  }, []);
 
   React.useEffect(() => {
     window.setTimeout(() => {

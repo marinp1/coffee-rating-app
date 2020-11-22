@@ -2,8 +2,8 @@
 import React from 'react';
 import styles from './AppPage.module.scss';
 
-import StoreContext from '../Store';
 import Auth from '../features/Auth';
+import {store} from '../Store';
 
 const AppPageComponent: React.FC<{}> = ({children}) => (
   <div className={styles['app-page']}>
@@ -14,18 +14,16 @@ const AppPageComponent: React.FC<{}> = ({children}) => (
 const withAppPage = (Component: React.ComponentType<any> | undefined) => ({
   ...props
 }) => {
+  const {state, dispatch} = React.useContext(store);
+
   return (
     <AppPageComponent {...props}>
       {Component ? (
-        <StoreContext.Consumer>
-          {store =>
-            store.currentUser ? (
-              <Component store={store} />
-            ) : (
-              <Auth firebase={store.firebase} />
-            )
-          }
-        </StoreContext.Consumer>
+        state.currentUser ? (
+          <Component store={state} dispatch={dispatch} />
+        ) : (
+          <Auth firebase={state.firebase} />
+        )
       ) : null}
     </AppPageComponent>
   );
