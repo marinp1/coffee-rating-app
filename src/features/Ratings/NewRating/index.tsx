@@ -7,7 +7,7 @@ import {SubHeader} from '../../../components/SubHeader';
 
 import styles from './NewRating.module.scss';
 
-import {Rating, GroundType} from '../../../types';
+import {Rating, GroundType, Store, AppProps} from '../../../types';
 
 interface RatingForm {
   manufacturer: string;
@@ -48,7 +48,7 @@ const mapFormToRating = (formData: FormData): Rating => {
   };
 };
 
-const NewRating: React.FC<{}> = () => {
+const NewRating: React.FC<AppProps> = ({dispatch}) => {
   const ratingForm = React.useRef<HTMLFormElement>(null);
   const [isFormValid, setFormValidity] = React.useState(false);
   const [saving, setSaving] = React.useState(false);
@@ -78,7 +78,11 @@ const NewRating: React.FC<{}> = () => {
             setSaving(false);
             return;
           }
-          console.log(mapFormToRating(new FormData(ratingForm.current)));
+          const rating = mapFormToRating(new FormData(ratingForm.current));
+          dispatch({
+            type: 'ADD_RATING',
+            rating,
+          });
           window.setTimeout(() => setSaving(false), 300);
         }}
       >

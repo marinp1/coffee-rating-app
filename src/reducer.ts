@@ -1,4 +1,3 @@
-import {act} from 'react-dom/test-utils';
 import {Action, Store} from './types';
 
 export default (state: Store, action: Action): Store => {
@@ -12,6 +11,11 @@ export default (state: Store, action: Action): Store => {
       return {
         ...state,
         currentUser: action.payload,
+      };
+    case 'ADD_RATING':
+      return {
+        ...state,
+        ratings: state.ratings.concat(action.rating),
       };
     default:
       return state;

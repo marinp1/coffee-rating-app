@@ -1,3 +1,4 @@
+import {Dispatch} from 'react';
 import {FirebaseInstance} from '../Firebase';
 import {Rating} from './Ratings';
 
@@ -15,4 +16,13 @@ export type Action =
   | {
       type: 'SET_USER';
       payload: firebase.default.User | null;
+    }
+  | {
+      type: 'ADD_RATING';
+      rating: Rating;
     };
+
+export type AppProps = {
+  store: Store;
+  dispatch: Dispatch<Action>;
+};

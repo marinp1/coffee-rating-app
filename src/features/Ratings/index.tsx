@@ -4,31 +4,8 @@ import styles from './Ratings.module.scss';
 import {Button} from '../../components/Button';
 import {SubHeader} from '../../components/SubHeader';
 
-import {RatingBlock, CoffeeRating} from './RatingBlock';
-import {Store} from '../../types';
-
-const coffeeRatings: CoffeeRating[] = [
-  {
-    manufacturer: 'Nordqvist',
-    rating: 5,
-    name: 'Jubileum',
-    bagPrice: 339,
-    bagWeight: 500,
-    notes: ['fruity'],
-    date: '2020-06-06',
-    description: 'Hyvä.',
-  },
-  {
-    manufacturer: 'Nordqvist 2',
-    rating: 5,
-    name: 'Jubileum 1',
-    bagPrice: 339,
-    bagWeight: 500,
-    notes: ['fruity'],
-    date: '2020-06-06',
-    description: 'Hyvä.',
-  },
-];
+import {RatingBlock} from './RatingBlock';
+import {AppProps, Store} from '../../types';
 
 const RATING_ORDERS = ['latest', 'best'] as const;
 const RATING_TITLES: Record<typeof RATING_ORDERS[number], string> = {
@@ -49,10 +26,12 @@ const SubHeaderComponent: React.FC<{
   </span>
 );
 
-const Ratings: React.FC<{store: Store}> = () => {
+const Ratings: React.FC<AppProps> = ({store}) => {
   const [ratingOrder, setRatingOrder] = React.useState<
     typeof RATING_ORDERS[number]
   >('latest');
+
+  const {ratings} = store;
 
   return (
     <>
@@ -66,7 +45,7 @@ const Ratings: React.FC<{store: Store}> = () => {
           />
         ))}
       </SubHeader>
-      <div className={styles['ratings']}>{coffeeRatings.map(RatingBlock)}</div>
+      <div className={styles['ratings']}>{ratings.map(RatingBlock)}</div>
       <div className={styles['new-rating']}>
         <Button href={{type: 'internal', to: '/ratings/new'}}>
           Add new rating
