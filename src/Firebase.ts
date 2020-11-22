@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
 import app from 'firebase/app';
-import React from 'react';
 import 'firebase/auth';
 
 const config = {
@@ -21,7 +20,7 @@ const uiConfig = {
     // Leave the lines as is for the providers you want to offer your users.
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ],
-  signInFlow: 'popup',
+  signInFlow: 'redirect',
   // tosUrl and privacyPolicyUrl accept either url string or a callback
   // function.
   // Terms of service url/callback.
@@ -32,7 +31,7 @@ const uiConfig = {
   },
 };
 
-class Firebase {
+export class Firebase {
   auth: firebase.auth.Auth;
   private ui: firebaseui.auth.AuthUI;
 
@@ -47,11 +46,4 @@ class Firebase {
   }
 }
 
-const FirebaseContext = React.createContext<
-  typeof Firebase['prototype'] | null
->(null);
-
-const firebaseInstance = new Firebase();
-export default firebaseInstance;
-
-export {FirebaseContext, uiConfig};
+export type FirebaseInstance = typeof Firebase['prototype'];

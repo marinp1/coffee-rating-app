@@ -5,7 +5,7 @@ import {Button} from '../../components/Button';
 import {SubHeader} from '../../components/SubHeader';
 
 import {RatingBlock, CoffeeRating} from './RatingBlock';
-import {AppPage} from '../../components/AppPage';
+import {Store} from '../../types';
 
 const coffeeRatings: CoffeeRating[] = [
   {
@@ -49,13 +49,13 @@ const SubHeaderComponent: React.FC<{
   </span>
 );
 
-const Ratings: React.FC<{}> = () => {
+const Ratings: React.FC<{store: Store}> = () => {
   const [ratingOrder, setRatingOrder] = React.useState<
     typeof RATING_ORDERS[number]
   >('latest');
 
   return (
-    <AppPage>
+    <>
       <SubHeader>
         {RATING_ORDERS.map(o => (
           <SubHeaderComponent
@@ -72,7 +72,7 @@ const Ratings: React.FC<{}> = () => {
           Add new rating
         </Button>
       </div>
-    </AppPage>
+    </>
   );
 };
 

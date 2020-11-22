@@ -1,13 +1,14 @@
 import React from 'react';
-import {useLocation} from 'react-router';
+import {Route, useLocation} from 'react-router';
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Switch, Redirect} from 'react-router-dom';
 
 import {Header} from './features/Header';
 import Ratings from './features/Ratings';
 import NewRating from './features/Ratings/NewRating';
 
 import styles from './App.module.scss';
+import {withAppPage} from './components/AppPage';
 
 const App: React.FC<{}> = () => {
   const location = useLocation();
@@ -39,8 +40,12 @@ const App: React.FC<{}> = () => {
           >
             <Switch location={location}>
               <Redirect path="/" to="/ratings" exact={true} />
-              <Route path="/ratings" exact={true} component={Ratings} />
-              <Route path="/ratings/new" component={NewRating} />
+              <Route
+                path="/ratings"
+                exact={true}
+                component={withAppPage(Ratings)}
+              />
+              <Route path="/ratings/new" component={withAppPage(NewRating)} />
               <Redirect path="*" to="/" />
             </Switch>
           </CSSTransition>

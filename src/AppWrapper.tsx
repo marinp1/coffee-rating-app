@@ -2,34 +2,36 @@ import React from 'react';
 
 import 'firebaseui/dist/firebaseui.css';
 
-import Firebase from './Firebase';
+import {Firebase} from './Firebase';
 import App from './App';
 
-import styles from './App.module.scss';
+import StoreContext, {defaultStore} from './Store';
+import {Store} from './types';
 
 const AppWrapper: React.FC<{}> = () => {
-  const [user, setUser] = React.useState<firebase.default.User | null>(null);
+  const [store, setStore] = React.useState<Store>(defaultStore);
 
   React.useEffect(() => {
-    Firebase.auth.onAuthStateChanged(user => {
-      setUser(user);
+    const firebase = new Firebase();
+
+    setStore({
+      ...store,
+      firebase,
     });
 
-    // The start method will wait until the DOM is loaded.
-    Firebase.showAuthUi('#firebaseui-auth-container');
+    firebase.auth.onAuthStateChanged(user => {
+      setStore({
+        ...store,
+        currentUser: user,
+      });
+    });
   }, []);
 
-  if (!user) {
-    return (
-      <div className={`${styles.app} ${styles['dark-theme']}`}>
-        <div className={styles.container}>
-          <div id="firebaseui-auth-container" />
-        </div>
-      </div>
-    );
-  }
-
-  return <App />;
+  return (
+    <StoreContext.Provider value={store}>
+      <App />
+    </StoreContext.Provider>
+  );
 };
 
 export default AppWrapper;

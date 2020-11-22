@@ -1,7 +1,6 @@
 import React from 'react';
 import {useHistory} from 'react-router';
 
-import {AppPage} from '../../../components/AppPage';
 import {Button} from '../../../components/Button';
 import {Input, TextArea} from '../../../components/Input';
 import {SubHeader} from '../../../components/SubHeader';
@@ -63,7 +62,7 @@ const NewRating: React.FC<{}> = () => {
   };
 
   return (
-    <AppPage>
+    <>
       <SubHeader>Add a new rating</SubHeader>
       <form
         ref={ratingForm}
@@ -184,7 +183,7 @@ const NewRating: React.FC<{}> = () => {
           Save rating
         </Button>
       </form>
-    </AppPage>
+    </>
   );
 };
 
