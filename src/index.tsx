@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'normalize.css';
 
 import './index.scss';
-import App from './App';
+import AppWrapper from './AppWrapper';
 import reportWebVitals from './reportWebVitals';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
@@ -12,7 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
-        <Route path="*" component={App} />
+        <Route path="*" component={AppWrapper} />
       </Switch>
     </Router>
   </React.StrictMode>,
