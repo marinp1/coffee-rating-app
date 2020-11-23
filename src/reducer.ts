@@ -12,10 +12,15 @@ export default (state: Store, action: Action): Store => {
         ...state,
         currentUser: action.payload,
       };
-    case 'ADD_RATING':
+    case 'SET_RATINGS':
       return {
         ...state,
-        ratings: state.ratings.concat(action.rating),
+        ratings: action.ratings,
+      };
+    case 'INITIALISE_RATINGS_DATABASE':
+      return {
+        ...state,
+        ratingsReference: action.ref,
       };
     default:
       return state;

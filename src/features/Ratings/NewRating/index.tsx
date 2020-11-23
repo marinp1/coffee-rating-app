@@ -7,7 +7,7 @@ import {SubHeader} from '../../../components/SubHeader';
 
 import styles from './NewRating.module.scss';
 
-import {Rating, GroundType, Store, AppProps} from '../../../types';
+import {Rating, GroundType, AppProps} from '../../../types';
 
 interface RatingForm {
   manufacturer: string;
@@ -48,17 +48,42 @@ const mapFormToRating = (formData: FormData): Rating => {
   };
 };
 
-const NewRating: React.FC<AppProps> = ({dispatch}) => {
+const NewRating: React.FC<AppProps> = ({store}) => {
   const ratingForm = React.useRef<HTMLFormElement>(null);
   const [isFormValid, setFormValidity] = React.useState(false);
   const [saving, setSaving] = React.useState(false);
 
   const {goBack} = useHistory();
 
+  const {ratingsReference} = store;
+
   const checkFormValidity = () => {
     if (ratingForm.current) {
       setFormValidity(ratingForm.current.checkValidity());
     }
+  };
+
+  const handleSubmit = () => {
+    if (!ratingsReference) {
+      return;
+    }
+    setSaving(true);
+    if (ratingForm.current) {
+      ratingForm.current.reportValidity();
+    }
+    if (!isFormValid || !ratingForm.current) {
+      setSaving(false);
+      return;
+    }
+    const rating = mapFormToRating(new FormData(ratingForm.current));
+
+    const newRatingRef = ratingsReference.push();
+    newRatingRef.set(rating, err => {
+      if (err) {
+        console.log(err);
+      }
+      setSaving(false);
+    });
   };
 
   return (
@@ -69,21 +94,8 @@ const NewRating: React.FC<AppProps> = ({dispatch}) => {
         className={styles['new-rating']}
         onChange={checkFormValidity}
         onSubmit={e => {
-          setSaving(true);
           e.preventDefault();
-          if (ratingForm.current) {
-            ratingForm.current.reportValidity();
-          }
-          if (!isFormValid || !ratingForm.current) {
-            setSaving(false);
-            return;
-          }
-          const rating = mapFormToRating(new FormData(ratingForm.current));
-          dispatch({
-            type: 'ADD_RATING',
-            rating,
-          });
-          window.setTimeout(() => setSaving(false), 300);
+          handleSubmit();
         }}
       >
         <Input

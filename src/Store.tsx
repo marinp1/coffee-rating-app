@@ -8,6 +8,7 @@ export const defaultStore: Store = {
   firebase: null,
   currentUser: null,
   ratings: [],
+  ratingsReference: null,
 };
 
 const store = React.createContext<{

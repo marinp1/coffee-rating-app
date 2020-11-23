@@ -33,6 +33,7 @@ const uiConfig = {
 
 export class Firebase {
   auth: firebase.auth.Auth;
+  database: firebase.database.Database;
   private ui: firebaseui.auth.AuthUI;
 
   public showAuthUi(id: string) {
@@ -42,6 +43,7 @@ export class Firebase {
   constructor() {
     app.initializeApp(config);
     this.auth = app.auth();
+    this.database = app.database();
     this.ui = new firebaseui.auth.AuthUI(this.auth);
   }
 }

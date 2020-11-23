@@ -6,6 +6,7 @@ export interface Store {
   firebase: FirebaseInstance | null;
   currentUser: firebase.default.User | null;
   ratings: Rating[];
+  ratingsReference: firebase.default.database.Reference | null;
 }
 
 export type Action =
@@ -18,8 +19,12 @@ export type Action =
       payload: firebase.default.User | null;
     }
   | {
-      type: 'ADD_RATING';
-      rating: Rating;
+      type: 'INITIALISE_RATINGS_DATABASE';
+      ref: firebase.default.database.Reference;
+    }
+  | {
+      type: 'SET_RATINGS';
+      ratings: Rating[];
     };
 
 export type AppProps = {

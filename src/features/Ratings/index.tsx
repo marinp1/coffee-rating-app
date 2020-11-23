@@ -5,7 +5,7 @@ import {Button} from '../../components/Button';
 import {SubHeader} from '../../components/SubHeader';
 
 import {RatingBlock} from './RatingBlock';
-import {AppProps, Store} from '../../types';
+import {AppProps, Rating} from '../../types';
 
 const RATING_ORDERS = ['latest', 'best'] as const;
 const RATING_TITLES: Record<typeof RATING_ORDERS[number], string> = {
@@ -26,12 +26,35 @@ const SubHeaderComponent: React.FC<{
   </span>
 );
 
-const Ratings: React.FC<AppProps> = ({store}) => {
+const Ratings: React.FC<AppProps> = ({store, dispatch}) => {
   const [ratingOrder, setRatingOrder] = React.useState<
     typeof RATING_ORDERS[number]
   >('latest');
 
-  const {ratings} = store;
+  const {ratings, firebase, currentUser, ratingsReference} = store;
+
+  React.useEffect(() => {
+    if (currentUser && firebase && !ratingsReference) {
+      const ref = firebase.database.ref(`ratings/${currentUser.uid}`);
+
+      dispatch({
+        type: 'INITIALISE_RATINGS_DATABASE',
+        ref,
+      });
+
+      ref.on('value', snapshot => {
+        const values = Object.values(
+          snapshot.val() as {
+            [id: string]: Rating;
+          }
+        );
+        dispatch({
+          type: 'SET_RATINGS',
+          ratings: values,
+        });
+      });
+    }
+  }, [currentUser, firebase, ratingsReference]);
 
   return (
     <>
