@@ -10,6 +10,8 @@ const RatingBlock: React.FC<Rating> = ({
   price,
   tastingNotes,
   notes,
+  groundType,
+  roastLevel,
   date,
   bagSize,
 }) => {
@@ -25,7 +27,11 @@ const RatingBlock: React.FC<Rating> = ({
       <div className={styles.manufacturer}>{manufacturer}</div>
       <div className={styles.rating}>{stars}</div>
       <div className={styles.name}>{coffeeName}</div>
-      <div className={styles.price}>{formattedPrice}€ / 100g</div>
+      <div className={styles['extra-info']}>
+        <div className={styles['roast-level']}>
+          {formattedPrice}€ / 100g | {`${groundType} (${roastLevel})`}
+        </div>
+      </div>
       <div className={styles.notes}>{tastingNotes.join(' | ')}</div>
       <div className={styles.date}>{date}</div>
       <div className={styles.description}>

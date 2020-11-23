@@ -5,7 +5,7 @@
   gap: 0.5rem;
   grid-template-areas:
     'img manufacturer rating'
-    'img name price'
+    'img name extra-info'
     'img notes date'
     'description description description';
   color: var(--color-theme-text-on-dark);
@@ -44,12 +44,6 @@
   letter-spacing: 0.15rem;
 }
 
-.price {
-  grid-area: price;
-  text-align: right;
-  color: var(--color-theme-text-on-dark-60);
-}
-
 .notes {
   grid-area: notes;
   text-transform: uppercase;
@@ -65,5 +59,11 @@
 
 .description {
   grid-area: description;
+  color: var(--color-theme-text-on-dark-60);
+}
+
+.extra-info {
+  grid-area: extra-info;
+  text-align: right;
   color: var(--color-theme-text-on-dark-60);
 }

@@ -70,6 +70,7 @@ const NewRating: React.FC<AppProps> = ({store}) => {
       setSaving(false);
       return;
     }
+
     const rating = mapFormToRating(new FormData(ratingForm.current));
 
     const newRatingRef = ratingsReference.push();
