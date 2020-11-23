@@ -8,7 +8,6 @@ import {SubHeader} from '../../../components/SubHeader';
 import styles from './NewRating.module.scss';
 
 import {Rating, GroundType, AppProps} from '../../../types';
-
 interface RatingForm {
   manufacturer: string;
   'coffee-name': string;
@@ -31,17 +30,13 @@ const mapFormToRating = (formData: FormData): Rating => {
   ) as RatingForm;
 
   return {
+    date: new Date().toISOString(),
     manufacturer: asPairs['manufacturer'],
     coffeeName: asPairs['coffee-name'],
     groundType: asPairs['ground-type'],
     roastLevel: Number(asPairs['roast-level'] || '-1'),
-    price:
-      Number(
-        (
-          (100 * Number(asPairs['price'] || '0')) /
-          Number(asPairs['bag-size'] || '1')
-        ).toFixed(2)
-      ) * 100,
+    price: Math.round(Number(asPairs['price'] || '0') * 100),
+    bagSize: Number(asPairs['bag-size'] || '1'),
     rating: Number(asPairs['rating'] || '-1'),
     notes: asPairs['notes'],
     tastingNotes: asPairs['tasting-notes'].split(' '),
@@ -53,7 +48,7 @@ const NewRating: React.FC<AppProps> = ({store}) => {
   const [isFormValid, setFormValidity] = React.useState(false);
   const [saving, setSaving] = React.useState(false);
 
-  const {goBack} = useHistory();
+  const {push} = useHistory();
 
   const {ratingsReference} = store;
 
@@ -81,8 +76,11 @@ const NewRating: React.FC<AppProps> = ({store}) => {
     newRatingRef.set(rating, err => {
       if (err) {
         console.log(err);
+        setSaving(false);
+        return;
       }
       setSaving(false);
+      push('/ratings');
     });
   };
 
@@ -186,7 +184,7 @@ const NewRating: React.FC<AppProps> = ({store}) => {
           type="button"
           theme="secondary"
           style={{gridArea: 'cancel-btn'}}
-          onClick={() => goBack()}
+          href={{type: 'internal', to: '/ratings'}}
         >
           Cancel
         </Button>

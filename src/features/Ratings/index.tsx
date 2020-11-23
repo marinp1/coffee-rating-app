@@ -43,15 +43,18 @@ const Ratings: React.FC<AppProps> = ({store, dispatch}) => {
       });
 
       ref.on('value', snapshot => {
-        const values = Object.values(
-          snapshot.val() as {
-            [id: string]: Rating;
-          }
-        );
-        dispatch({
-          type: 'SET_RATINGS',
-          ratings: values,
-        });
+        const dbRatings = snapshot.val() as
+          | {
+              [id: string]: Rating;
+            }
+          | undefined;
+
+        if (dbRatings) {
+          dispatch({
+            type: 'SET_RATINGS',
+            ratings: Object.values(dbRatings),
+          });
+        }
       });
     }
   }, [currentUser, firebase, ratingsReference]);
