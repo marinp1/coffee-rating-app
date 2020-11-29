@@ -3,6 +3,8 @@ import {useHistory} from 'react-router';
 
 import {Button} from '../../../components/Button';
 import {Input, TextArea} from '../../../components/Input';
+import {Select} from '../../../components/Select';
+
 import {SubHeader} from '../../../components/SubHeader';
 
 import styles from './NewRating.module.scss';
@@ -115,14 +117,15 @@ const NewRating: React.FC<AppProps> = ({store}) => {
           required={true}
           groupStyles={{gridArea: 'name'}}
         />
-        <select
+        <Select
           name="ground-type"
+          label="Ground type"
           required={true}
-          style={{gridArea: 'ground-type'}}
+          groupStyles={{gridArea: 'ground-type'}}
         >
           <option value={GroundType.bean}>Bean</option>
           <option value={GroundType.ground}>Ground</option>
-        </select>
+        </Select>
         <Input
           label="Roast level"
           type="number"
