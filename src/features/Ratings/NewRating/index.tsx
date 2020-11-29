@@ -2,7 +2,7 @@ import React from 'react';
 import {useHistory} from 'react-router';
 
 import {Button} from '../../../components/Button';
-import {Input, TextArea} from '../../../components/Input';
+import {Input, TextArea, RadioGroup} from '../../../components/Input';
 import {Select} from '../../../components/Select';
 
 import {SubHeader} from '../../../components/SubHeader';
@@ -158,14 +158,12 @@ const NewRating: React.FC<AppProps> = ({store}) => {
           suffix="g"
           groupStyles={{gridArea: 'size'}}
         />
-        <Input
+        <RadioGroup
           label="Rating (1-10)"
-          type="number"
-          name="rating"
           required={true}
+          name="rating"
           min={1}
           max={10}
-          step={1}
           groupStyles={{gridArea: 'rating'}}
         />
         <TextArea

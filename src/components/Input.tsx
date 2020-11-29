@@ -89,4 +89,63 @@ const TextArea: React.FC<
   );
 };
 
-export {Input, TextArea};
+interface RadioGroupProps {
+  groupStyles?: React.CSSProperties;
+  name: string;
+  label: string;
+  required?: boolean;
+  options?: Array<{
+    label: string;
+    value: string;
+  }>;
+  min?: number;
+  max?: number;
+}
+
+const RadioGroup: React.FC<RadioGroupProps> = ({
+  groupStyles,
+  name,
+  label,
+  required,
+  options,
+  min,
+  max,
+}) => {
+  const radioOptions =
+    min && max
+      ? [...new Array(max - min + 1)].map((_, ind) => ({
+          label: String(ind + 1),
+          value: String(ind + 1),
+        }))
+      : options || [];
+
+  return (
+    <div
+      className={`custom-input-group ${styles['group']}`}
+      style={groupStyles || {}}
+    >
+      <label
+        htmlFor={name}
+        className={required ? styles['required-input'] : ''}
+      >
+        {label}
+      </label>
+      <div className={`${styles['wrapper']} ${styles['radio']}`}>
+        {radioOptions.map(({label, value}) => (
+          <div>
+            <input
+              id={`${name}-${value}`}
+              name={name}
+              required={required}
+              type="radio"
+              value={value}
+            />
+            <label htmlFor={`${name}-${value}`}>{label}</label>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export {Input, TextArea, RadioGroup};

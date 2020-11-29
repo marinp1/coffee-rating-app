@@ -21,6 +21,40 @@
   @include custom-input;
 }
 
+.radio {
+  @include custom-input;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  > div {
+    padding: 0.6rem 0.6rem;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    input {
+      visibility: hidden;
+      &:checked + label {
+        font-weight: bold;
+        background: var(--color-theme-background-accent);
+      }
+    }
+    label {
+      padding: 0.6rem 0.6rem;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+      cursor: pointer;
+      z-index: 2;
+      font-weight: lighter;
+      position: absolute;
+      margin: 0;
+    }
+  }
+}
+
 .textarea {
   @include custom-input;
   min-width: 100%;
