@@ -1,0 +1,33 @@
+name: Node CI
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+    branches:
+      - staging
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: aslafy-z/conventional-pr-title-action@master
+        with:
+          success-state: Title follows the specification.
+          failure-state: Title does not follow the specification.
+          context-name: conventional-pr-title
+          preset: conventional-changelog-angular@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v1
+      - name: install node v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
