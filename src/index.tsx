@@ -12,7 +12,7 @@ import {StateProvider} from './Store';
 ReactDOM.render(
   <React.StrictMode>
     <StateProvider>
-      <Router>
+      <Router basename="/coffee-rating-app">
         <Switch>
           <Route path="*" component={App} />
         </Switch>
