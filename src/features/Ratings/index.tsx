@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './Ratings.module.scss';
 
 import {Button} from '../../components/Button';

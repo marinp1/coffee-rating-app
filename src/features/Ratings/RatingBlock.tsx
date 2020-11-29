@@ -1,7 +1,37 @@
 import React from 'react';
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
+import {
+  faStar as faFullStar,
+  faStarHalfAlt,
+} from '@fortawesome/free-solid-svg-icons';
+
+import {faStar as faEmptyStar} from '@fortawesome/free-regular-svg-icons';
+
 import {Rating} from '../../types';
 
 import styles from './RatingBlock.module.scss';
+
+const ratingToIcons = (rating: number) => {
+  const numberOfHalfStars = rating % 2;
+  const numberOfFullStars = Math.floor(rating / 2);
+  const numberOfEmptyStars = 5 - numberOfFullStars - numberOfHalfStars;
+
+  const mapStarCountToIcon = (
+    n: number,
+    icon: typeof faFullStar | typeof faEmptyStar
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ) => [...new Array(n)].map(_ => <FontAwesomeIcon icon={icon} />);
+
+  return (
+    <>
+      {mapStarCountToIcon(numberOfFullStars, faFullStar)}
+      {mapStarCountToIcon(numberOfHalfStars, faStarHalfAlt)}
+      {mapStarCountToIcon(numberOfEmptyStars, faEmptyStar)}
+    </>
+  );
+};
 
 const RatingBlock: React.FC<Rating> = ({
   manufacturer,
@@ -15,11 +45,10 @@ const RatingBlock: React.FC<Rating> = ({
   date,
   bagSize,
 }) => {
-  const stars = [...new Array(10)]
-    .map((_, ind) => (rating > ind ? '★' : '☆'))
-    .join(' ');
+  const stars = ratingToIcons(rating);
 
   const formattedPrice = String((price / bagSize).toFixed(2));
+  const formattedDate = new Date(date).toLocaleDateString();
 
   return (
     <div className={styles['rating-block']} key={`${manufacturer}-${name}`}>
@@ -33,7 +62,7 @@ const RatingBlock: React.FC<Rating> = ({
         </div>
       </div>
       <div className={styles.notes}>{tastingNotes.join(' | ')}</div>
-      <div className={styles.date}>{date}</div>
+      <div className={styles.date}>{formattedDate}</div>
       <div className={styles.description}>
         <i>{notes}</i>
       </div>
