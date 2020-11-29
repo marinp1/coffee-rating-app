@@ -1,0 +1,25 @@
+.login {
+  color: var(--color-theme-text-on-light);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    color: white;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.2rem;
+    text-align: center;
+  }
+  h2 {
+    color: white;
+    letter-spacing: 0.1rem;
+    opacity: 50%;
+    font-weight: lighter;
+    margin-bottom: 2rem;
+  }
+}

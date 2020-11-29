@@ -22,6 +22,11 @@ export default (state: Store, action: Action): Store => {
         ...state,
         ratingsReference: action.ref,
       };
+    case 'TOGGLE_SIDE_PANEL':
+      return {
+        ...state,
+        sidePanelState: action.newState,
+      };
     default:
       return state;
   }

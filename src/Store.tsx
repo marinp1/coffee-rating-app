@@ -6,6 +6,7 @@ import {Action, Store} from './types';
 
 export const defaultStore: Store = {
   firebase: null,
+  sidePanelState: 'collapsed',
   currentUser: null,
   ratings: [],
   ratingsReference: null,

@@ -1,4 +1,4 @@
-.header {
+@mixin header-base-styles {
   background: var(--color-theme-primary);
   color: var(--color-theme-text-on-light);
   text-transform: uppercase;
@@ -10,6 +10,15 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  @include header-base-styles;
+
+  svg {
+    cursor: pointer;
+  }
 
   h1 {
     font-weight: bold;

@@ -21,8 +21,11 @@ const ratingToIcons = (rating: number) => {
   const mapStarCountToIcon = (
     n: number,
     icon: typeof faFullStar | typeof faEmptyStar
+  ) =>
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ) => [...new Array(n)].map(_ => <FontAwesomeIcon icon={icon} />);
+    [...new Array(n)].map((_, i) => (
+      <FontAwesomeIcon key={`star-${i}-${icon.iconName}`} icon={icon} />
+    ));
 
   return (
     <>

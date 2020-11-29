@@ -4,6 +4,7 @@ import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import {Switch, Redirect} from 'react-router-dom';
 
 import {Header} from './features/Header';
+import SidePanel from './features/SidePanel';
 import Ratings from './features/Ratings';
 import NewRating from './features/Ratings/NewRating';
 
@@ -51,6 +52,7 @@ const App: React.FC<{}> = () => {
     <div className={`${styles.app} ${styles['dark-theme']}`}>
       <div className={styles.container}>
         <Header />
+        <SidePanel />
         <TransitionGroup style={{position: 'relative'}}>
           <CSSTransition
             key={location.key}
