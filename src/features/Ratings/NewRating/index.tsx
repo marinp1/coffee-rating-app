@@ -54,6 +54,12 @@ const NewRating: React.FC<AppProps> = ({store}) => {
 
   const {ratingsReference} = store;
 
+  React.useEffect(() => {
+    if (!ratingsReference) {
+      push('/ratings');
+    }
+  }, [ratingsReference]);
+
   const checkFormValidity = () => {
     if (ratingForm.current) {
       setFormValidity(ratingForm.current.checkValidity());
@@ -64,6 +70,7 @@ const NewRating: React.FC<AppProps> = ({store}) => {
     if (!ratingsReference) {
       return;
     }
+
     setSaving(true);
     if (ratingForm.current) {
       ratingForm.current.reportValidity();
@@ -126,15 +133,12 @@ const NewRating: React.FC<AppProps> = ({store}) => {
           <option value={GroundType.bean}>Bean</option>
           <option value={GroundType.ground}>Ground</option>
         </Select>
-        <Input
+        <RadioGroup
           label="Roast level"
-          type="number"
-          name="roast-level"
           required={true}
+          name="roast-level"
           min={1}
-          max={7}
-          step={1}
-          pattern="\d+"
+          max={5}
           groupStyles={{gridArea: 'roast-level'}}
         />
         <Input
@@ -178,8 +182,12 @@ const NewRating: React.FC<AppProps> = ({store}) => {
           label="Tasting notes"
           groupStyles={{gridArea: 'taste-notes'}}
         />
-        <Button disabled={saving} theme="primary" style={{gridArea: 'add-btn'}}>
-          Add a tasting note
+        <Button
+          disabled={saving || true}
+          theme="primary"
+          style={{gridArea: 'add-btn'}}
+        >
+          (TBA)
         </Button>
         <Button
           disabled={saving}

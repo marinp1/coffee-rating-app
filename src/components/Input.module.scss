@@ -35,7 +35,7 @@
     align-items: center;
     position: relative;
     input {
-      visibility: hidden;
+      opacity: 0;
       &:checked + label {
         font-weight: bold;
         background: var(--color-theme-background-accent);

@@ -132,7 +132,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
       </label>
       <div className={`${styles['wrapper']} ${styles['radio']}`}>
         {radioOptions.map(({label, value}) => (
-          <div>
+          <div key={`radio-${name}-${value}`}>
             <input
               id={`${name}-${value}`}
               name={name}
